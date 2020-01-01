@@ -35,6 +35,7 @@ public class ArtistController {
         return firstArtistFound;
     }
 
+
     @GetMapping("/{artistName}/toptracks")
     public Track[] getArtistsTopTracks(@PathVariable String artistName) {
         mySpotifyRestWrapper.clientCredentialsSync();

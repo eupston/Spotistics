@@ -1,1 +1,1 @@
-A web app for viewing spotify statistics
+A Springboot/React web app for viewing spotify statistics
