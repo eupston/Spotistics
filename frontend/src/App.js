@@ -15,7 +15,7 @@ class App extends Component {
                         "images":[{
                                     "height": null,
                                     "width": null,
-                                    "url":"https://dummyimage.com/320X320/1e90ff/1e90ff"
+                                    "url":"https://dummyimage.com/320X320/4bb6e6/4bb6e6"
                                     }]
                         },
         "audiofeatures":{"Acousticness": 0,
@@ -51,7 +51,7 @@ class App extends Component {
                         images:[{
                             "height": null,
                             "width": null,
-                            "url":"https://dummyimage.com/320X320/1e90ff/1e90ff"
+                            "url":"https://dummyimage.com/320X320/4bb6e6/4bb6e6"
                         }],
                     }),
                 })
