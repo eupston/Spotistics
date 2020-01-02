@@ -13,13 +13,11 @@ import com.wrapper.spotify.requests.authorization.client_credentials.ClientCrede
 import com.wrapper.spotify.requests.data.artists.GetArtistsTopTracksRequest;
 import com.wrapper.spotify.requests.data.search.SearchItemRequest;
 import com.wrapper.spotify.requests.data.tracks.GetAudioFeaturesForTrackRequest;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SpotifyRestWrapper {
 
@@ -109,23 +107,19 @@ public class SpotifyRestWrapper {
 
     public HashMap meanArtistsTopTracksAudioFeatures(List<AudioFeatures> allAudioFeatures) {
         HashMap meanAudioFeatures = new HashMap();
-        // Put elements to the map
-        //  summedAudioFeatures.put("Ram", new Double(3434.34));
-//        map.get("Krishna"); # =123.22
-//        map.put(key, map.get(key) + 1);
         // sum all features
         for (AudioFeatures features : allAudioFeatures) {
             float Acousticness = features.getAcousticness();
             float Danceability = features.getDanceability();
-            float DurationMs = features.getDurationMs();
             float Energy = features.getEnergy();
             float Instrumentalness = features.getInstrumentalness();
-            float Key = features.getKey();
             float Liveness = features.getLiveness();
-            float Loudness = features.getLoudness();
             float Valence = features.getValence();
-            float Tempo = features.getTempo();
             float Speechiness = features.getSpeechiness();
+            float DurationMs = features.getDurationMs();
+            float Key = features.getKey();
+            float Loudness = features.getLoudness();
+            float Tempo = features.getTempo();
             if(!meanAudioFeatures.containsKey("Acousticness")){
                 meanAudioFeatures.put("Acousticness", Acousticness);
             }
@@ -140,40 +134,58 @@ public class SpotifyRestWrapper {
                 float oldvalue = (float) meanAudioFeatures.get("Danceability");
                 meanAudioFeatures.put("Danceability", Danceability + oldvalue);
             }
-//            if(!meanAudioFeatures.containsKey("DurationMs")){
+
+            if(!meanAudioFeatures.containsKey("Energy")){
+                meanAudioFeatures.put("Energy", Energy);
+            }
+            else{
+                float oldvalue = (float) meanAudioFeatures.get("Energy");
+                meanAudioFeatures.put("Energy", Energy + oldvalue);
+            }
+            if(!meanAudioFeatures.containsKey("Instrumentalness")){
+                meanAudioFeatures.put("Instrumentalness", Instrumentalness);
+            }
+            else{
+                float oldvalue = (float) meanAudioFeatures.get("Instrumentalness");
+                meanAudioFeatures.put("Instrumentalness", Instrumentalness + oldvalue);
+            }
+
+            if(!meanAudioFeatures.containsKey("Liveness")){
+                meanAudioFeatures.put("Liveness", Liveness);
+            }
+            else{
+                float oldvalue = (float) meanAudioFeatures.get("Liveness");
+                meanAudioFeatures.put("Liveness", Liveness + oldvalue);
+            }
+            if(!meanAudioFeatures.containsKey("Valence")){
+                meanAudioFeatures.put("Valence", Valence);
+            }
+            else{
+                float oldvalue = (float) meanAudioFeatures.get("Valence");
+                meanAudioFeatures.put("Valence", Valence + oldvalue);
+            }
+            if(!meanAudioFeatures.containsKey("Speechiness")){
+                meanAudioFeatures.put("Speechiness", Speechiness);
+            }
+            else{
+                float oldvalue = (float) meanAudioFeatures.get("Speechiness");
+                meanAudioFeatures.put("Speechiness", Speechiness + oldvalue);
+            }
+
+            //            if(!meanAudioFeatures.containsKey("DurationMs")){
 //                meanAudioFeatures.put("DurationMs", DurationMs);
 //            }
 //            else{
 //                float oldvalue = (float) meanAudioFeatures.get("DurationMs");
 //                meanAudioFeatures.put("DurationMs", DurationMs + oldvalue);
 //            }
-//            if(!meanAudioFeatures.containsKey("Energy")){
-//                meanAudioFeatures.put("Energy", Energy);
-//            }
-//            else{
-//                float oldvalue = (float) meanAudioFeatures.get("Energy");
-//                meanAudioFeatures.put("Energy", Energy + oldvalue);
-//            }
-//            if(!meanAudioFeatures.containsKey("Instrumentalness")){
-//                meanAudioFeatures.put("Instrumentalness", Instrumentalness);
-//            }
-//            else{
-//                float oldvalue = (float) meanAudioFeatures.get("Instrumentalness");
-//                meanAudioFeatures.put("Instrumentalness", Instrumentalness + oldvalue);
-//            }
-//            if(!meanAudioFeatures.containsKey("Key")){
+
+            //            if(!meanAudioFeatures.containsKey("Key")){
 //                meanAudioFeatures.put("Key", Key);
 //            }
 //            else{
 //                float oldvalue = (float) meanAudioFeatures.get("Key");
 //                meanAudioFeatures.put("Key", Key + oldvalue);
-//            }
-//            if(!meanAudioFeatures.containsKey("Liveness")){
-//                meanAudioFeatures.put("Liveness", Liveness);
-//            }
-//            else{
-//                float oldvalue = (float) meanAudioFeatures.get("Liveness");
-//                meanAudioFeatures.put("Liveness", Liveness + oldvalue);
 //            }
 //            if(!meanAudioFeatures.containsKey("Loudness")){
 //                meanAudioFeatures.put("Loudness", Loudness);
@@ -182,13 +194,7 @@ public class SpotifyRestWrapper {
 //                float oldvalue = (float) meanAudioFeatures.get("Loudness");
 //                meanAudioFeatures.put("Loudness", Loudness + oldvalue);
 //            }
-//            if(!meanAudioFeatures.containsKey("Valence")){
-//                meanAudioFeatures.put("Valence", Valence);
-//            }
-//            else{
-//                float oldvalue = (float) meanAudioFeatures.get("Valence");
-//                meanAudioFeatures.put("Valence", Valence + oldvalue);
-//            }
+
 //            if(!meanAudioFeatures.containsKey("Tempo")){
 //                meanAudioFeatures.put("Tempo", Tempo);
 //            }
@@ -196,13 +202,7 @@ public class SpotifyRestWrapper {
 //                float oldvalue = (float) meanAudioFeatures.get("Tempo");
 //                meanAudioFeatures.put("Tempo", Tempo + oldvalue);
 //            }
-//            if(!meanAudioFeatures.containsKey("Speechiness")){
-//                meanAudioFeatures.put("Speechiness", Speechiness);
-//            }
-//            else{
-//                float oldvalue = (float) meanAudioFeatures.get("Speechiness");
-//                meanAudioFeatures.put("Speechiness", Speechiness + oldvalue);
-//            }
+
 
         }
         // calculate mean for each feature

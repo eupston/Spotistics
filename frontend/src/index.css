@@ -25,5 +25,7 @@ code {
 
 .item {
   padding: 50px 50px 50px 50px;
+  align-content: center;
+
 }
 
