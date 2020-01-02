@@ -33,13 +33,52 @@ class App extends Component {
 
     handleGetArtistAudioInfo = (artist) => {
         fetch('/api/artists/' + artist)
-            .then(response => response.json())
-            .then(response => {this.setState({"artistStats":response})});
+            .then(function(response) {
+                if(response.ok){
+                    return response.json();
+                }
+                throw new Error('Something went wrong with request.');
+                })
+            .then(response => {this.setState({"artistStats":response})})
+            .catch( error => {
+                this.setState({
+                        artistStats: Object.assign({}, this.state.artistStats, {
+                            name: "Artist Not Found",
+                    }),
+                })
+                this.setState({
+                    artistStats: Object.assign({}, this.state.artistStats, {
+                        images:[{
+                            "height": null,
+                            "width": null,
+                            "url":"https://dummyimage.com/320X320/1e90ff/1e90ff"
+                        }],
+                    }),
+                })
+                console.log("request failed", error)
+            });
         fetch('/api/artists/' + artist + "/toptracks/audiofeatures/mean")
-            .then(response => response.json())
-            .then(response => {this.setState({audiofeatures:response})});
+            .then(function(response) {
+                if(response.ok){
+                    return response.json();
+                }
+                throw new Error('Something went wrong with request.');
+            })
+            .then(response => {this.setState({audiofeatures:response})})
+            .catch( error => {
+                const defaultAudioFeatures = {
+                    "Acousticness": 0,
+                    "Danceability": 0,
+                    "Valence":0,
+                    "Energy": 0,
+                    "Speechiness": 0,
+                    "Liveness": 0,
+                    "Instrumentalness": 0
+                };
+                this.setState({audiofeatures:defaultAudioFeatures})
+                console.log("request failed", error)
+            });
     };
-
 
     render() {
             return (
