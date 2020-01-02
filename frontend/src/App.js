@@ -84,6 +84,9 @@ class App extends Component {
             return (
                 <div className="App" >
                 <header className="App-header">
+                    <h1>Spotistics</h1>
+                    <p></p>
+                    <p></p>
                     <div className="flexbox-container">
                     <SearchArtist  className="item" onGetArtistAudioInfo={this.handleGetArtistAudioInfo} artistStats={this.state.artistStats} />
                         <Graph className="item" artistAudioFeatures={this.state.audiofeatures}/>
