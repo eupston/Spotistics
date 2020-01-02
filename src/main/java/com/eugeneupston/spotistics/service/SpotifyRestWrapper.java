@@ -120,7 +120,7 @@ public class SpotifyRestWrapper {
             float DurationMs = features.getDurationMs();
             float Energy = features.getEnergy();
             float Instrumentalness = features.getInstrumentalness();
-            int Key = features.getKey();
+            float Key = features.getKey();
             float Liveness = features.getLiveness();
             float Loudness = features.getLoudness();
             float Valence = features.getValence();
@@ -140,69 +140,69 @@ public class SpotifyRestWrapper {
                 float oldvalue = (float) meanAudioFeatures.get("Danceability");
                 meanAudioFeatures.put("Danceability", Danceability + oldvalue);
             }
-            if(!meanAudioFeatures.containsKey("DurationMs")){
-                meanAudioFeatures.put("DurationMs", DurationMs);
-            }
-            else{
-                float oldvalue = (float) meanAudioFeatures.get("DurationMs");
-                meanAudioFeatures.put("DurationMs", DurationMs + oldvalue);
-            }
-            if(!meanAudioFeatures.containsKey("Energy")){
-                meanAudioFeatures.put("Energy", Energy);
-            }
-            else{
-                float oldvalue = (float) meanAudioFeatures.get("Energy");
-                meanAudioFeatures.put("Energy", Energy + oldvalue);
-            }
-            if(!meanAudioFeatures.containsKey("Instrumentalness")){
-                meanAudioFeatures.put("Instrumentalness", Instrumentalness);
-            }
-            else{
-                float oldvalue = (float) meanAudioFeatures.get("Instrumentalness");
-                meanAudioFeatures.put("Instrumentalness", Instrumentalness + oldvalue);
-            }
-            if(!meanAudioFeatures.containsKey("Key")){
-                meanAudioFeatures.put("Key", Key);
-            }
-            else{
-                int oldvalue = (int) meanAudioFeatures.get("Key");
-                meanAudioFeatures.put("Key", Key + oldvalue);
-            }
-            if(!meanAudioFeatures.containsKey("Liveness")){
-                meanAudioFeatures.put("Liveness", Liveness);
-            }
-            else{
-                float oldvalue = (float) meanAudioFeatures.get("Liveness");
-                meanAudioFeatures.put("Liveness", Liveness + oldvalue);
-            }
-            if(!meanAudioFeatures.containsKey("Loudness")){
-                meanAudioFeatures.put("Loudness", Loudness);
-            }
-            else{
-                float oldvalue = (float) meanAudioFeatures.get("Loudness");
-                meanAudioFeatures.put("Loudness", Loudness + oldvalue);
-            }
-            if(!meanAudioFeatures.containsKey("Valence")){
-                meanAudioFeatures.put("Valence", Valence);
-            }
-            else{
-                float oldvalue = (float) meanAudioFeatures.get("Valence");
-                meanAudioFeatures.put("Valence", Valence + oldvalue);
-            }
-            if(!meanAudioFeatures.containsKey("Tempo")){
-                meanAudioFeatures.put("Tempo", Tempo);
-            }
-            else{
-                float oldvalue = (float) meanAudioFeatures.get("Tempo");
-                meanAudioFeatures.put("Tempo", Tempo + oldvalue);
-            }
-            if(!meanAudioFeatures.containsKey("Speechiness")){
-                meanAudioFeatures.put("Speechiness", Speechiness);
-            }
-            else{
-                float oldvalue = (float) meanAudioFeatures.get("Speechiness");
-                meanAudioFeatures.put("Speechiness", Speechiness + oldvalue);
-            }
+//            if(!meanAudioFeatures.containsKey("DurationMs")){
+//                meanAudioFeatures.put("DurationMs", DurationMs);
+//            }
+//            else{
+//                float oldvalue = (float) meanAudioFeatures.get("DurationMs");
+//                meanAudioFeatures.put("DurationMs", DurationMs + oldvalue);
+//            }
+//            if(!meanAudioFeatures.containsKey("Energy")){
+//                meanAudioFeatures.put("Energy", Energy);
+//            }
+//            else{
+//                float oldvalue = (float) meanAudioFeatures.get("Energy");
+//                meanAudioFeatures.put("Energy", Energy + oldvalue);
+//            }
+//            if(!meanAudioFeatures.containsKey("Instrumentalness")){
+//                meanAudioFeatures.put("Instrumentalness", Instrumentalness);
+//            }
+//            else{
+//                float oldvalue = (float) meanAudioFeatures.get("Instrumentalness");
+//                meanAudioFeatures.put("Instrumentalness", Instrumentalness + oldvalue);
+//            }
+//            if(!meanAudioFeatures.containsKey("Key")){
+//                meanAudioFeatures.put("Key", Key);
+//            }
+//            else{
+//                float oldvalue = (float) meanAudioFeatures.get("Key");
+//                meanAudioFeatures.put("Key", Key + oldvalue);
+//            }
+//            if(!meanAudioFeatures.containsKey("Liveness")){
+//                meanAudioFeatures.put("Liveness", Liveness);
+//            }
+//            else{
+//                float oldvalue = (float) meanAudioFeatures.get("Liveness");
+//                meanAudioFeatures.put("Liveness", Liveness + oldvalue);
+//            }
+//            if(!meanAudioFeatures.containsKey("Loudness")){
+//                meanAudioFeatures.put("Loudness", Loudness);
+//            }
+//            else{
+//                float oldvalue = (float) meanAudioFeatures.get("Loudness");
+//                meanAudioFeatures.put("Loudness", Loudness + oldvalue);
+//            }
+//            if(!meanAudioFeatures.containsKey("Valence")){
+//                meanAudioFeatures.put("Valence", Valence);
+//            }
+//            else{
+//                float oldvalue = (float) meanAudioFeatures.get("Valence");
+//                meanAudioFeatures.put("Valence", Valence + oldvalue);
+//            }
+//            if(!meanAudioFeatures.containsKey("Tempo")){
+//                meanAudioFeatures.put("Tempo", Tempo);
+//            }
+//            else{
+//                float oldvalue = (float) meanAudioFeatures.get("Tempo");
+//                meanAudioFeatures.put("Tempo", Tempo + oldvalue);
+//            }
+//            if(!meanAudioFeatures.containsKey("Speechiness")){
+//                meanAudioFeatures.put("Speechiness", Speechiness);
+//            }
+//            else{
+//                float oldvalue = (float) meanAudioFeatures.get("Speechiness");
+//                meanAudioFeatures.put("Speechiness", Speechiness + oldvalue);
+//            }
 
         }
         // calculate mean for each feature

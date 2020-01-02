@@ -1,70 +1,62 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import Image from 'react-bootstrap/Image'
+import Graph from "./components/graph";
+import SearchArtist from "./components/SearchArtist";
+// import { View } from 'react-native';
+
 
 class App extends Component {
 
     state = {
-        "name":null,
-        "followers": {
-            "href": null,
-            "total": null
-        },
-        "images":[{
-                    "height": null,
-                    "width": null,
-                    "url":null
-                    },
-                    {
-                    "height": null,
-                    "width": null,
-                    "url":null
-        }]
+        "artistStats":{
+                        "name":null,
+                        "followers": {
+                            "href": null,
+                            "total": null
+                        },
+                        "images":[{
+                                    "height": null,
+                                    "width": null,
+                                    "url":null
+                                    },
+                                    {
+                                    "height": null,
+                                    "width": null,
+                                    "url":"https://dummyimage.com/320X320/000000/000000"
+                        }]
+                        },
+        "audiofeatures":{"Acousticness": 0, "Danceability": 0}
     };
 
     componentDidMount() {
     }
 
-    testrestapi = (artist) => {
-        console.log("recieved arist:" + artist)
 
+    handleGetArtistAudioInfo = (artist) => {
         fetch('/api/artists/' + artist)
             .then(response => response.json())
-            .then(response => {this.setState(response)})
-            .then(console.log(this.state));
+            .then(response => {this.setState({"artistStats":response})});
+        fetch('/api/artists/' + artist + "/toptracks/audiofeatures/mean")
+            .then(response => response.json())
+            .then(response => {this.setState({audiofeatures:response})});
     };
 
 
-render() {
-    return (
-        <div className="App">
-        <header className="App-header">
-        <p></p>
-            {/*<img src={logo} className="App-logo" alt="logo"/>*/}
-        <Image src={this.state.images[1].url} height={this.state.images[1].height} width={this.state.images[1].width} roundedCircle/>
-            <p></p>
-            <Form>
-                <Form.Group controlId="formSearchArtist">
-                    <Form.Control ref={input => this.textInput = input} type="artist" placeholder="Enter artist" />
-                    <Form.Text className="text-muted">
-                    </Form.Text>
-                </Form.Group>
-                <Button onClick={() => this.testrestapi(this.textInput.value)} variant="primary">
-                    Get Artist
-                </Button>
-            </Form>
-        <h1 className="App-title">Artist {this.state.name}</h1>
-        <h1 className="App-title">Followers {this.state.followers.total}</h1>
-        </header>
-        <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
-    </div>
-);
-}
+    render() {
+            return (
+                <div className="App" >
+                <header className="App-header">
+                    <div className="flexbox-container">
+                    <SearchArtist  className="item" onGetArtistAudioInfo={this.handleGetArtistAudioInfo} artistStats={this.state.artistStats} />
+                    <Graph className="item" artistAudioFeatures={this.state.audiofeatures}/>
+                </div>
+                    {/*<h1 className="App-title">Artist: {this.state.artistStats.name}</h1>*/}
+                    {/*<h1 className="App-title">Followers: {this.state.artistStats.followers.total}</h1>*/}
+                    {/*<p></p>*/}
+                </header>
+            </div>
+        );
+    }
 }
 
 export default App;
