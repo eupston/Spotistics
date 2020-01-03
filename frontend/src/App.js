@@ -6,22 +6,6 @@ import SearchArtist from "./components/SearchArtist";
 class App extends Component {
 
     state = {
-        // "artistStats":{
-        //                 "artistName": null,
-        //                 "artistImageURL":"https://dummyimage.com/320X320/4bb6e6/4bb6e6"
-        //                 },
-        // "audiofeatures":{
-        //     "topTracksAudioFeaturesMean":{
-        //             "Acousticness": 0,
-        //             "Danceability": 0,
-        //             "Valence":0,
-        //             "Energy": 0,
-        //             "Speechiness": 0,
-        //             "Liveness": 0,
-        //             "Instrumentalness": 0
-        //     }
-        // }
-
             "artistName": null,
             "artistImageURL": "https://dummyimage.com/320X320/4bb6e6/4bb6e6",
             "topTracksAudioFeaturesMean": {
@@ -32,7 +16,8 @@ class App extends Component {
                 "liveness": 0,
                 "valence": 0,
                 "speechiness": 0
-            }
+            },
+            "isLoading":false
 
     };
 
@@ -41,32 +26,42 @@ class App extends Component {
 
 
     handleGetArtistAudioInfo = (artist) => {
-        fetch('/api/artists/' + artist + "/toptracks/audiofeatures/mean")
-            .then(function(response) {
-                if(response.ok){
-                    return response.json();
-                }
-                throw new Error('Something went wrong with request.');
-            })
-            .then(response => {this.setState(response)})
-            .catch( error => {
-                const defaultState = {
-                    "artistName": "Artist Not Found",
-                    "artistImageURL": "https://dummyimage.com/320X320/4bb6e6/4bb6e6",
-                    "topTracksAudioFeaturesMean": {
-                        "acousticness": 0,
-                        "danceability": 0,
-                        "energy": 0,
-                        "instrumentalness": 0,
-                        "liveness": 0,
-                        "valence": 0,
-                        "speechiness": 0
+
+        this.setState({ isLoading: true }, () => {
+            fetch('/api/artists/' + artist + "/toptracks/audiofeatures/mean")
+                .then(function (response) {
+                    if (response.ok) {
+                        return response.json();
                     }
-                };
-                this.setState(defaultState)
-                console.log("request failed", error)
-            });
+                    throw new Error('Something went wrong with request.');
+                })
+                .then(response => {
+                    this.setState(response)
+                })
+                .then(response => {
+                    this.setState({"isLoading": false})
+                })
+                .catch(error => {
+                    const defaultState = {
+                        "artistName": "Artist Not Found",
+                        "artistImageURL": "https://dummyimage.com/320X320/4bb6e6/4bb6e6",
+                        "topTracksAudioFeaturesMean": {
+                            "acousticness": 0,
+                            "danceability": 0,
+                            "energy": 0,
+                            "instrumentalness": 0,
+                            "liveness": 0,
+                            "valence": 0,
+                            "speechiness": 0
+                        }
+                    };
+                    this.setState(defaultState)
+                    this.setState({"isLoading": false})
+                    console.log("request failed", error)
+                });
+        })
     };
+
 
     render() {
             return (

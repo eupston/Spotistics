@@ -20,8 +20,11 @@ class SearchArtist extends Component {
                         <Form.Text className="text-muted">
                         </Form.Text>
                     </Form.Group>
-                    <Button onClick={() => this.props.onGetArtistAudioInfo(this.textInput.value)} variant="outline-primary" block>
-                        Get Artist Statistics
+                    <Button onClick={() => this.props.onGetArtistAudioInfo(this.textInput.value)}
+                            variant="outline-primary"
+                            disabled={this.props.artistInfo.isLoading}
+                            block>
+                        {this.props.artistInfo.isLoading ? 'Loading…' : 'Get Artist Statistics'}
                     </Button>
                 </Form>
                 <p></p>
