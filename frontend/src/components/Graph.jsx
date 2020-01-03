@@ -3,7 +3,6 @@ import { Chart } from 'react-charts'
 import '../App.css';
 import Carousel from 'react-bootstrap/Carousel'
 
-
 const Graph = ({newData}) => {
 
     const myData = Object.keys(newData).map(function(key) {
@@ -38,8 +37,8 @@ const Graph = ({newData}) => {
     )
     const axes = React.useMemo(
         () => [
-            {primary: true, type: 'ordinal', position: 'bottom'},
-            {type: 'linear', position: 'left', stacked: false, max:10}
+            {primary: true, type: 'ordinal', position: 'bottom', max:1},
+            {type: 'linear', position: 'left', stacked: false}
         ],
         []
     )
@@ -47,7 +46,7 @@ const Graph = ({newData}) => {
 
    return( <div className="item" style={{ width: '800px',  height: '528px'  }}>
            <p></p>
-
+           {console.log(data)}
        {/*<Carousel interval={false}*/}
        {/*          indicators={false} style={{ width: '800px',  height: '428px'  }}>*/}
 

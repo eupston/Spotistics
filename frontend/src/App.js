@@ -9,16 +9,15 @@ class App extends Component {
             "artistName": null,
             "artistImageURL": "https://dummyimage.com/320X320/4bb6e6/4bb6e6",
             "topTracksAudioFeaturesMean": {
-                "acousticness": 0,
-                "danceability": 0,
-                "energy": 0,
-                "instrumentalness": 0,
-                "liveness": 0,
-                "valence": 0,
-                "speechiness": 0
+                "acousticness": 0.0,
+                "danceability": 0.2,
+                "energy": 0.3,
+                "instrumentalness": 0.45,
+                "liveness":  0.6,
+                "valence": 0.8,
+                "speechiness": 1.0
             },
-            "isLoading":false
-
+            "isLoading":false,
     };
 
     componentDidMount() {
