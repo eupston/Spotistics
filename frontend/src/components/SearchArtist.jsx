@@ -11,7 +11,7 @@ class SearchArtist extends Component {
 
         return (
             <div className="item">
-                <Image src={this.props.artistStats.images[0].url} height="320" width="320"  roundedCircle/>
+                <Image src={this.props.artistInfo.artistImageURL} height="320" width="320"  roundedCircle/>
                 <p></p>
                 <p></p>
                 <Form>
@@ -25,7 +25,7 @@ class SearchArtist extends Component {
                     </Button>
                 </Form>
                 <p></p>
-                <h1 > {this.props.artistStats.name}</h1>
+                <h1 > {this.props.artistInfo.artistName}</h1>
             </div>
         );
     }

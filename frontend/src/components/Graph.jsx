@@ -1,17 +1,19 @@
 import React from 'react'
 import { Chart } from 'react-charts'
 import '../App.css';
+import Carousel from 'react-bootstrap/Carousel'
 
-const Graph = ({artistAudioFeatures}) => {
 
-    const audiofeatures = Object.keys(artistAudioFeatures).map(function(key) {
-        return [key, Number(artistAudioFeatures[key])];
+const Graph = ({newData}) => {
+
+    const myData = Object.keys(newData).map(function(key) {
+        return [key, Number(newData[key])];
     });
 
     const data = [
             {
                 label: 'Series 1',
-                data: audiofeatures
+                data: myData
             }
         ]
 
@@ -44,15 +46,25 @@ const Graph = ({artistAudioFeatures}) => {
 
 
    return( <div className="item" style={{ width: '800px',  height: '528px'  }}>
-        <Chart
+           <p></p>
+
+       {/*<Carousel interval={false}*/}
+       {/*          indicators={false} style={{ width: '800px',  height: '428px'  }}>*/}
+
+       {/*    <Carousel.Item style={{ width: '800px',  height: '428px'  }}>*/}
+           <Chart
             data={data}
             axes={axes}
             series={series}
             getSeriesStyle={getSeriesStyle}
             getDatumStyle={getDatumStyle}
             dark/>
-           <p></p>
-           <h1 >Mean of Top Tracks Audio Features</h1>
+               <h1 >Mean of Top Tracks Audio Features</h1>
+        {/*   </Carousel.Item>*/}
+        {/*   <Carousel.Item>*/}
+        {/*       Yo*/}
+        {/*   </Carousel.Item>*/}
+        {/*</Carousel>*/}
        </div>
     );
 
