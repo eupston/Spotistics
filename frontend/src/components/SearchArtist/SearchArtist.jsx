@@ -2,22 +2,19 @@ import React, {Component} from 'react';
 import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import '../App.css';
+import './SearchArtist.css'
 
 class SearchArtist extends Component {
     state = {};
 
     render() {
-
         return (
-            <div className="item">
-                <Image src={this.props.artistInfo.artistImageURL} height="320" width="320"  roundedCircle/>
-                <p></p>
-                <p></p>
-                <Form>
+            <div className="searchArtist">
+                <Image className='image' src={this.props.artistInfo.artistImageURL} fluid roundedCircle/>
+                <Form className='form' >
                     <Form.Group controlId="formSearchArtist">
                         <Form.Control ref={input => this.textInput = input} type="artist" placeholder="Enter Artist" />
-                        <Form.Text className="text-muted">
+                        <Form.Text >
                         </Form.Text>
                     </Form.Group>
                     <Button onClick={() => this.props.onGetArtistAudioInfo(this.textInput.value)}
@@ -28,7 +25,7 @@ class SearchArtist extends Component {
                     </Button>
                 </Form>
                 <p></p>
-                <h1 > {this.props.artistInfo.artistName}</h1>
+                <h1 > {this.props.artistInfo.artistName === null ? null : this.props.artistInfo.artistName.toUpperCase()}</h1>
             </div>
         );
     }

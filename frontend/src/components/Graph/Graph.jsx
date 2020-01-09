@@ -1,6 +1,6 @@
 import React from 'react'
 import { Chart } from 'react-charts'
-import '../App.css';
+import '../../App.css';
 import Carousel from 'react-bootstrap/Carousel'
 
 const Graph = ({newData}) => {
@@ -46,11 +46,6 @@ const Graph = ({newData}) => {
 
    return( <div className="item" style={{ width: '800px',  height: '528px'  }}>
            <p></p>
-           {console.log(data)}
-       {/*<Carousel interval={false}*/}
-       {/*          indicators={false} style={{ width: '800px',  height: '428px'  }}>*/}
-
-       {/*    <Carousel.Item style={{ width: '800px',  height: '428px'  }}>*/}
            <Chart
             data={data}
             axes={axes}
@@ -59,11 +54,6 @@ const Graph = ({newData}) => {
             getDatumStyle={getDatumStyle}
             dark/>
                <h1 >Mean of Top Tracks Audio Features</h1>
-        {/*   </Carousel.Item>*/}
-        {/*   <Carousel.Item>*/}
-        {/*       Yo*/}
-        {/*   </Carousel.Item>*/}
-        {/*</Carousel>*/}
        </div>
     );
 

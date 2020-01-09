@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
-import Graph from "./components/Graph";
-import SearchArtist from "./components/SearchArtist";
+import Graph from "./components/Graph/Graph";
+import SearchArtist from "./components/SearchArtist/SearchArtist";
+import Chart from "./components/Chart/Chart"
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 class App extends Component {
 
@@ -64,15 +67,22 @@ class App extends Component {
 
     render() {
             return (
-                <div className="App" >
+            <div className="App" >
+                <Navbar className="navbar" sticky="top"  bg="dark" variant="dark">
+                    <img
+                        src="eug_logo.png"
+                        width="30"
+                        height="30"
+                        className="navbar-image"
+                    />
+                    <Navbar.Brand href="#home">Spotistics</Navbar.Brand>
+                    <Nav className="mr-auto">
+                        <Nav.Link href="#home">Home</Nav.Link>
+                    </Nav>
+                </Navbar>
                 <header className="App-header">
-                    <h1>Spotistics</h1>
-                    <p></p>
-                    <p></p>
-                    <div className="flexbox-container">
-                    <SearchArtist  className="item" onGetArtistAudioInfo={this.handleGetArtistAudioInfo} artistInfo={this.state} />
-                        <Graph className="item" newData={this.state.topTracksAudioFeaturesMean}/>
-                </div>
+                    <SearchArtist onGetArtistAudioInfo={this.handleGetArtistAudioInfo} artistInfo={this.state} />
+                    <Chart  data={this.state.topTracksAudioFeaturesMean} xaxis_id="Audio Features" />
                 </header>
             </div>
         );
