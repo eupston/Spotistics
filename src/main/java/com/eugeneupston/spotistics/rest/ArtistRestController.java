@@ -1,5 +1,6 @@
 package com.eugeneupston.spotistics.rest;
 
+import com.eugeneupston.spotistics.entity.AudioFeature;
 import com.eugeneupston.spotistics.entity.SpotifyArtist;
 import com.eugeneupston.spotistics.service.SpotifyArtistService;
 import com.eugeneupston.spotistics.wrapper.SpotifyRestWrapper;
@@ -70,12 +71,12 @@ public class ArtistRestController {
 
     //TODO implement in DATABASE
     @GetMapping("/{artistName}/toptracks/audiofeatures")
-    public List<AudioFeatures> getArtistsTopTracksAudioFeatures(@PathVariable String artistName) {
+    public List<AudioFeature> getArtistsTopTracksAudioFeatures(@PathVariable String artistName) {
         mySpotifyRestWrapper.clientCredentialsSync();
         Artist firstArtistFound = mySpotifyRestWrapper.searchArtist(artistName);
         String artistId = firstArtistFound.getId();
         Track[] tracks = mySpotifyRestWrapper.getArtistsTopTracks(artistId);
-        List<AudioFeatures> allAudioFeatures = mySpotifyRestWrapper.getArtistsTopTracksAudioFeatures(tracks);
+        List<AudioFeature> allAudioFeatures = mySpotifyRestWrapper.getArtistsTopTracksAudioFeatures(tracks);
         return allAudioFeatures;
     }
 

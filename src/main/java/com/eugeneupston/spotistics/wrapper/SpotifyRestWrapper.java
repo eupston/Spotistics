@@ -1,5 +1,6 @@
 package com.eugeneupston.spotistics.wrapper;
 
+import com.eugeneupston.spotistics.entity.AudioFeature;
 import com.eugeneupston.spotistics.entity.SpotifyArtist;
 import com.eugeneupston.spotistics.entity.TopTracksAudioFeaturesMean;
 import com.neovisionaries.i18n.CountryCode;
@@ -85,18 +86,29 @@ public class SpotifyRestWrapper {
 
 
 
-    public List<AudioFeatures> getArtistsTopTracksAudioFeatures(Track[] artistTracks) {
-        List<AudioFeatures> allAudioFeatures = new ArrayList<AudioFeatures>();
+    public List<AudioFeature> getArtistsTopTracksAudioFeatures(Track[] artistTracks) {
+        List<AudioFeature> allAudioFeatures = new ArrayList<AudioFeature>();
 
         for(Track track : artistTracks){
             String currentId = track.getId();
+            String currentTrackName = track.getName();
 
             GetAudioFeaturesForTrackRequest getAudioFeaturesForTrackRequest = spotifyApi
                     .getAudioFeaturesForTrack(currentId)
                     .build();
             try {
+
                 AudioFeatures audioFeatures = getAudioFeaturesForTrackRequest.execute();
-                allAudioFeatures.add(audioFeatures);
+                AudioFeature currentAudioFeature = new AudioFeature(currentId,
+                                                                    currentTrackName,
+                                                                    audioFeatures.getAcousticness(),
+                                                                    audioFeatures.getDanceability(),
+                                                                    audioFeatures.getEnergy(),
+                                                                    audioFeatures.getInstrumentalness(),
+                                                                    audioFeatures.getLiveness(),
+                                                                    audioFeatures.getValence(),
+                                                                    audioFeatures.getSpeechiness());
+                allAudioFeatures.add(currentAudioFeature);
 
             } catch (IOException | SpotifyWebApiException e) {
                 System.out.println("Error: " + e.getMessage());
@@ -109,9 +121,9 @@ public class SpotifyRestWrapper {
     public SpotifyArtist meanArtistsTopTracksAudioFeatures(Artist theArtist, SpotifyArtist theSpotifyArtist) {
         String artistId = theArtist.getId();
         Track[] tracks = getArtistsTopTracks(artistId);
-        List<AudioFeatures> allAudioFeatures = getArtistsTopTracksAudioFeatures(tracks);
+        List<AudioFeature> allAudioFeatures = getArtistsTopTracksAudioFeatures(tracks);
         TopTracksAudioFeaturesMean allAudioFeaturesMean = new TopTracksAudioFeaturesMean();
-        for (AudioFeatures features : allAudioFeatures) {
+        for (AudioFeature features : allAudioFeatures) {
             allAudioFeaturesMean.setAcousticness(allAudioFeaturesMean.getAcousticness() + features.getAcousticness()/allAudioFeatures.size());
             allAudioFeaturesMean.setDanceability(allAudioFeaturesMean.getDanceability() + features.getDanceability()/allAudioFeatures.size());
             allAudioFeaturesMean.setEnergy(allAudioFeaturesMean.getEnergy() + features.getEnergy()/allAudioFeatures.size());
