@@ -1,0 +1,36 @@
+.image{
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.searchArtist {
+    min-width: 450px;
+    min-height: 450px;
+    align-self: center;
+    justify-self: center;
+}
+
+.form{
+    width: 75%;
+    margin: 0 auto;
+}
+
+/*.circle {*/
+/*    border: 10px solid #4bb6e6;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    border-radius: 100%;*/
+/*    text-align: center;*/
+/*    display: flex;*/
+/*    flex: 2 1 auto;*/
+/*    font-size: 75px;*/
+/*    color: #4bb6e6;*/
+/*}*/
+
+/*.circle:before {*/
+/*    content:'';*/
+/*    float: inside;*/
+/*    padding-top:100%;*/
+/*}*/

@@ -1,0 +1,11 @@
+.chart {
+    width:90%;
+    height:85%;
+    justify-self: center;
+    align-self: center;
+}
+
+
+.dropdown{
+    margin: 7px;
+}

@@ -5,8 +5,6 @@ import Button from "react-bootstrap/Button";
 import './SearchArtist.css'
 
 class SearchArtist extends Component {
-    state = {};
-
     render() {
         return (
             <div className="searchArtist">

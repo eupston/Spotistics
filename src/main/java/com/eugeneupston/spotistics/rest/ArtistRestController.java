@@ -55,7 +55,6 @@ public class ArtistRestController {
             theArtist = new SpotifyArtist(artist_name, artist_img);
             mySpotifyArtistService.save(theArtist);
         }
-        System.out.println(theArtist.toString());
         return theArtist;
     }
 
@@ -94,16 +93,13 @@ public class ArtistRestController {
         if(theArtist == null) {
             SpotifyArtist theSpotifyArtist = new SpotifyArtist(artist_name, artist_img);
             theArtist = mySpotifyRestWrapper.meanArtistsTopTracksAudioFeatures(firstArtistFound, theSpotifyArtist);
-//            System.out.println("theArtist: " + theArtist);
             mySpotifyArtistService.save(theArtist);
         }
         //else check if audio features have been calculated yet
         else if(theArtist.getTopTracksAudioFeaturesMean() == null || theArtist.getSpotifyTracks().size() == 0){
             theArtist = mySpotifyRestWrapper.meanArtistsTopTracksAudioFeatures(firstArtistFound, theArtist);
-//            System.out.println("theArtist: " + theArtist);
             mySpotifyArtistService.save(theArtist);
         }
-//        System.out.println("theArtist: " + theArtist);
 
 
         return theArtist;
