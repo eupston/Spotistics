@@ -3,15 +3,12 @@ import './Chart.css';
 import { ResponsiveBar } from '@nivo/bar'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Button from "react-bootstrap/Button";
 
 const Chart = (props) => {
 
     const currentData = Object.keys(props.data).map(key => {
         return ({[props.xaxis_id]: key , [key] : props.data[key]});
     });
-
-    const [selectedDropDownOption, setSelectedDropDownOption] = useState(props.dropdown_options[0]);
 
     return(
         <div className='chart'>
