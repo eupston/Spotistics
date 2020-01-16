@@ -1,26 +1,40 @@
 package com.eugeneupston.spotistics.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
+@Entity
+@Table(name="audio_features")
 public class AudioFeature {
 
-    public String trackId;
-    public String trackName;
-    private float Acousticness;
-    private float Danceability;
-    private float Energy;
-    private float Instrumentalness;
-    private float Liveness;
-    private float Valence;
-    private float Speechiness;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private int id;
 
+    @Column(name="acousticness")
+    private float Acousticness;
+
+    @Column(name="danceability")
+    private float Danceability;
+
+    @Column(name="energy")
+    private float Energy;
+
+    @Column(name="instrumentalness")
+    private float Instrumentalness;
+
+    @Column(name="liveness")
+    private float Liveness;
+
+    @Column(name="valence")
+    private float Valence;
+
+    @Column(name="speechiness")
+    private float Speechiness;
     public AudioFeature() {
     }
 
-    public AudioFeature(String trackId, String trackName, float acousticness, float danceability, float energy, float instrumentalness, float liveness, float valence, float speechiness) {
-        this.trackId = trackId;
-        this.trackName = trackName;
+    public AudioFeature(float acousticness, float danceability, float energy, float instrumentalness, float liveness, float valence, float speechiness) {
         Acousticness = acousticness;
         Danceability = danceability;
         Energy = energy;
@@ -28,22 +42,6 @@ public class AudioFeature {
         Liveness = liveness;
         Valence = valence;
         Speechiness = speechiness;
-    }
-
-    public String getTrackId() {
-        return trackId;
-    }
-
-    public void setTrackId(String trackId) {
-        this.trackId = trackId;
-    }
-
-    public String getTrackName() {
-        return trackName;
-    }
-
-    public void setTrackName(String trackName) {
-        this.trackName = trackName;
     }
 
     public float getAcousticness() {
@@ -102,5 +100,17 @@ public class AudioFeature {
         Speechiness = speechiness;
     }
 
-
+    @Override
+    public String toString() {
+        return "AudioFeature{" +
+                "id=" + id +
+                ", Acousticness=" + Acousticness +
+                ", Danceability=" + Danceability +
+                ", Energy=" + Energy +
+                ", Instrumentalness=" + Instrumentalness +
+                ", Liveness=" + Liveness +
+                ", Valence=" + Valence +
+                ", Speechiness=" + Speechiness +
+                '}';
+    }
 }

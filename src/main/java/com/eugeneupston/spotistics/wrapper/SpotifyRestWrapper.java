@@ -2,7 +2,7 @@ package com.eugeneupston.spotistics.wrapper;
 
 import com.eugeneupston.spotistics.entity.AudioFeature;
 import com.eugeneupston.spotistics.entity.SpotifyArtist;
-import com.eugeneupston.spotistics.entity.TopTracksAudioFeaturesMean;
+import com.eugeneupston.spotistics.entity.SpotifyTrack;
 import com.neovisionaries.i18n.CountryCode;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.enums.ModelObjectType;
@@ -86,9 +86,8 @@ public class SpotifyRestWrapper {
 
 
 
-    public List<AudioFeature> getArtistsTopTracksAudioFeatures(Track[] artistTracks) {
-        List<AudioFeature> allAudioFeatures = new ArrayList<AudioFeature>();
-
+    public List<SpotifyTrack> getArtistsTopTracksAudioFeatures(Track[] artistTracks, SpotifyArtist theSpotifyArtist) {
+        List<SpotifyTrack> tracks = new ArrayList<SpotifyTrack>();
         for(Track track : artistTracks){
             String currentId = track.getId();
             String currentTrackName = track.getName();
@@ -99,40 +98,41 @@ public class SpotifyRestWrapper {
             try {
 
                 AudioFeatures audioFeatures = getAudioFeaturesForTrackRequest.execute();
-                AudioFeature currentAudioFeature = new AudioFeature(currentId,
-                                                                    currentTrackName,
-                                                                    audioFeatures.getAcousticness(),
+                AudioFeature currentAudioFeature = new AudioFeature(audioFeatures.getAcousticness(),
                                                                     audioFeatures.getDanceability(),
                                                                     audioFeatures.getEnergy(),
                                                                     audioFeatures.getInstrumentalness(),
                                                                     audioFeatures.getLiveness(),
                                                                     audioFeatures.getValence(),
                                                                     audioFeatures.getSpeechiness());
-                allAudioFeatures.add(currentAudioFeature);
+                SpotifyTrack currentTrack = new SpotifyTrack(currentId, currentTrackName, theSpotifyArtist, currentAudioFeature);
+                tracks.add(currentTrack);
 
             } catch (IOException | SpotifyWebApiException e) {
                 System.out.println("Error: " + e.getMessage());
             }
 
         }
-        return allAudioFeatures;
+        return tracks;
     }
 
     public SpotifyArtist meanArtistsTopTracksAudioFeatures(Artist theArtist, SpotifyArtist theSpotifyArtist) {
         String artistId = theArtist.getId();
         Track[] tracks = getArtistsTopTracks(artistId);
-        List<AudioFeature> allAudioFeatures = getArtistsTopTracksAudioFeatures(tracks);
-        TopTracksAudioFeaturesMean allAudioFeaturesMean = new TopTracksAudioFeaturesMean();
-        for (AudioFeature features : allAudioFeatures) {
-            allAudioFeaturesMean.setAcousticness(allAudioFeaturesMean.getAcousticness() + features.getAcousticness()/allAudioFeatures.size());
-            allAudioFeaturesMean.setDanceability(allAudioFeaturesMean.getDanceability() + features.getDanceability()/allAudioFeatures.size());
-            allAudioFeaturesMean.setEnergy(allAudioFeaturesMean.getEnergy() + features.getEnergy()/allAudioFeatures.size());
-            allAudioFeaturesMean.setInstrumentalness(allAudioFeaturesMean.getInstrumentalness() + features.getInstrumentalness()/allAudioFeatures.size());
-            allAudioFeaturesMean.setLiveness(allAudioFeaturesMean.getLiveness() + features.getLiveness()/allAudioFeatures.size());
-            allAudioFeaturesMean.setValence(allAudioFeaturesMean.getValence() + features.getValence()/allAudioFeatures.size());
-            allAudioFeaturesMean.setSpeechiness(allAudioFeaturesMean.getSpeechiness() + features.getSpeechiness()/allAudioFeatures.size());
+        List<SpotifyTrack> allTracks = getArtistsTopTracksAudioFeatures(tracks, theSpotifyArtist);
+        AudioFeature allAudioFeaturesMean = new AudioFeature();
+        for (SpotifyTrack track : allTracks) {
+            AudioFeature features = track.getAudioFeature();
+            allAudioFeaturesMean.setAcousticness(allAudioFeaturesMean.getAcousticness() + features.getAcousticness()/allTracks.size());
+            allAudioFeaturesMean.setDanceability(allAudioFeaturesMean.getDanceability() + features.getDanceability()/allTracks.size());
+            allAudioFeaturesMean.setEnergy(allAudioFeaturesMean.getEnergy() + features.getEnergy()/allTracks.size());
+            allAudioFeaturesMean.setInstrumentalness(allAudioFeaturesMean.getInstrumentalness() + features.getInstrumentalness()/allTracks.size());
+            allAudioFeaturesMean.setLiveness(allAudioFeaturesMean.getLiveness() + features.getLiveness()/allTracks.size());
+            allAudioFeaturesMean.setValence(allAudioFeaturesMean.getValence() + features.getValence()/allTracks.size());
+            allAudioFeaturesMean.setSpeechiness(allAudioFeaturesMean.getSpeechiness() + features.getSpeechiness()/allTracks.size());
         }
         theSpotifyArtist.setTopTracksAudioFeaturesMean(allAudioFeaturesMean);
+        theSpotifyArtist.setSpotifyTracks(allTracks);
         return theSpotifyArtist;
     }
 }

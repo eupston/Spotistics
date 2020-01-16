@@ -1,6 +1,11 @@
 package com.eugeneupston.spotistics.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="artist")
@@ -19,7 +24,11 @@ public class SpotifyArtist {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="top_tracks_audio_features_mean_id")
-    private TopTracksAudioFeaturesMean topTracksAudioFeaturesMean;
+    private AudioFeature topTracksAudioFeaturesMean;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "spotifyArtist", cascade = CascadeType.ALL)
+    private List<SpotifyTrack> spotifyTracks;
 
     public SpotifyArtist() {
     }
@@ -27,6 +36,13 @@ public class SpotifyArtist {
     public SpotifyArtist(String artistName, String artistImageURL) {
         this.artistName = artistName;
         this.artistImageURL = artistImageURL;
+    }
+
+    public SpotifyArtist(String artistName, String artistImageURL, AudioFeature topTracksAudioFeaturesMean, List<SpotifyTrack> spotifyTracks) {
+        this.artistName = artistName;
+        this.artistImageURL = artistImageURL;
+        this.topTracksAudioFeaturesMean = topTracksAudioFeaturesMean;
+        this.spotifyTracks = spotifyTracks;
     }
 
     public String getArtistName() {
@@ -45,12 +61,29 @@ public class SpotifyArtist {
         this.artistImageURL = artistImageURL;
     }
 
-    public TopTracksAudioFeaturesMean getTopTracksAudioFeaturesMean() {
+    public AudioFeature getTopTracksAudioFeaturesMean() {
         return topTracksAudioFeaturesMean;
     }
 
-    public void setTopTracksAudioFeaturesMean(TopTracksAudioFeaturesMean topTracksAudioFeaturesMean) {
+    public void setTopTracksAudioFeaturesMean(AudioFeature topTracksAudioFeaturesMean) {
         this.topTracksAudioFeaturesMean = topTracksAudioFeaturesMean;
+    }
+
+    public List<SpotifyTrack> getSpotifyTracks() {
+        return spotifyTracks;
+    }
+
+    public void setSpotifyTracks(List<SpotifyTrack> spotifyTracks) {
+        this.spotifyTracks = spotifyTracks;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -60,6 +93,7 @@ public class SpotifyArtist {
                 ", artistName='" + artistName + '\'' +
                 ", artistImageURL='" + artistImageURL + '\'' +
                 ", topTracksAudioFeaturesMean=" + topTracksAudioFeaturesMean +
+                ", spotifyTracks=" + spotifyTracks +
                 '}';
     }
 }

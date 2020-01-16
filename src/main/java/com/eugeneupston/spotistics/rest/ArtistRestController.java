@@ -1,11 +1,10 @@
 package com.eugeneupston.spotistics.rest;
 
-import com.eugeneupston.spotistics.entity.AudioFeature;
 import com.eugeneupston.spotistics.entity.SpotifyArtist;
+import com.eugeneupston.spotistics.entity.SpotifyTrack;
 import com.eugeneupston.spotistics.service.SpotifyArtistService;
 import com.eugeneupston.spotistics.wrapper.SpotifyRestWrapper;
 import com.wrapper.spotify.model_objects.specification.Artist;
-import com.wrapper.spotify.model_objects.specification.AudioFeatures;
 import com.wrapper.spotify.model_objects.specification.Track;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,6 +55,7 @@ public class ArtistRestController {
             theArtist = new SpotifyArtist(artist_name, artist_img);
             mySpotifyArtistService.save(theArtist);
         }
+        System.out.println(theArtist.toString());
         return theArtist;
     }
 
@@ -71,13 +71,16 @@ public class ArtistRestController {
 
     //TODO implement in DATABASE
     @GetMapping("/{artistName}/toptracks/audiofeatures")
-    public List<AudioFeature> getArtistsTopTracksAudioFeatures(@PathVariable String artistName) {
+    public List<SpotifyTrack>  getArtistsTopTracksAudioFeatures(@PathVariable String artistName) {
         mySpotifyRestWrapper.clientCredentialsSync();
         Artist firstArtistFound = mySpotifyRestWrapper.searchArtist(artistName);
         String artistId = firstArtistFound.getId();
+        String artist_name = firstArtistFound.getName().toLowerCase();
+        String artist_img = firstArtistFound.getImages()[0].getUrl();
+        SpotifyArtist theSpotifyArtist = new SpotifyArtist(artist_name, artist_img);
         Track[] tracks = mySpotifyRestWrapper.getArtistsTopTracks(artistId);
-        List<AudioFeature> allAudioFeatures = mySpotifyRestWrapper.getArtistsTopTracksAudioFeatures(tracks);
-        return allAudioFeatures;
+        List<SpotifyTrack> allTracks = mySpotifyRestWrapper.getArtistsTopTracksAudioFeatures(tracks, theSpotifyArtist);
+        return allTracks;
     }
 
     @GetMapping("/{artistName}/toptracks/audiofeatures/mean")
@@ -91,13 +94,17 @@ public class ArtistRestController {
         if(theArtist == null) {
             SpotifyArtist theSpotifyArtist = new SpotifyArtist(artist_name, artist_img);
             theArtist = mySpotifyRestWrapper.meanArtistsTopTracksAudioFeatures(firstArtistFound, theSpotifyArtist);
+//            System.out.println("theArtist: " + theArtist);
             mySpotifyArtistService.save(theArtist);
         }
         //else check if audio features have been calculated yet
-        else if(theArtist.getTopTracksAudioFeaturesMean() == null){
+        else if(theArtist.getTopTracksAudioFeaturesMean() == null || theArtist.getSpotifyTracks().size() == 0){
             theArtist = mySpotifyRestWrapper.meanArtistsTopTracksAudioFeatures(firstArtistFound, theArtist);
+//            System.out.println("theArtist: " + theArtist);
             mySpotifyArtistService.save(theArtist);
         }
+//        System.out.println("theArtist: " + theArtist);
+
 
         return theArtist;
     }
