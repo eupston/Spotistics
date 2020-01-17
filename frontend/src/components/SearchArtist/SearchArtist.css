@@ -6,8 +6,8 @@
 }
 
 .searchArtist {
-    min-width: 450px;
-    min-height: 450px;
+    min-width: 320px;
+    min-height: 400px;
     align-self: center;
     justify-self: center;
 }
@@ -15,6 +15,7 @@
 .form{
     width: 75%;
     margin: 0 auto;
+    padding-bottom: 10px;
 }
 
 /*.circle {*/

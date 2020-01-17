@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './Chart.css';
 import { ResponsiveBar } from '@nivo/bar'
 import DropdownButton from 'react-bootstrap/DropdownButton'
@@ -12,11 +12,12 @@ const Chart = (props) => {
 
     return(
         <div className='chart'>
+            {console.log(window.innerWidth)}
             <ResponsiveBar
                 data={currentData}
                 keys={Object.keys(props.data)}
                 indexBy= {props.xaxis_id}
-                margin={{ top: 10, right: 50, bottom: 50, left: 50 }}
+                margin={{ top: 10, right: 50, bottom: props.bottom_margin, left: 50 }}
                 padding={0.2}
                 maxValue={1.0}
                 groupMode="stacked"
@@ -69,10 +70,10 @@ const Chart = (props) => {
                 axisBottom={{
                     tickSize: 5,
                     tickPadding: 5,
-                    tickRotation: 0,
+                    tickRotation: props.xaxis_tilt,
                     legend:  props.xaxis_id,
                     legendPosition: 'middle',
-                    legendOffset: 45,
+                    legendOffset: props.legend_bottom_offset,
                     color: '#282c34',
 
                 }}

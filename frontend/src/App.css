@@ -2,10 +2,7 @@
   text-align: center;
 }
 
-/*@media(min-width: 500px)  {*/
-/*}*/
-
-.App-header {
+.App-body {
   background-color: #282c34;
   color: white;
   display: grid;
@@ -13,11 +10,17 @@
   grid-gap: 1em;
   justify-items: center;
   align-items:center;
+}
 
+@media (max-width: 768px) {
+  .App-body {
+    grid-template-columns: 100%;
+    grid-gap: 0em;
+  }
 }
 
 .navbar{
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   font-family: Helvetica;
 }
 

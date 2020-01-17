@@ -22,7 +22,6 @@ class SearchArtist extends Component {
                         {this.props.artistInfo.isLoading ? 'Loading…' : 'Get Artist Statistics'}
                     </Button>
                 </Form>
-                <p></p>
                 <h1 > {this.props.artistInfo.artistName === null ? null : this.props.artistInfo.artistName.toUpperCase()}</h1>
             </div>
         );
