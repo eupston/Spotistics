@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import EugLogo from './assets/Logo/eug_logo.png';
 import SearchArtist from "./components/SearchArtist/SearchArtist";
 import Chart from "./components/Chart/Chart"
 import Navbar from 'react-bootstrap/Navbar';
@@ -13,7 +14,7 @@ class App extends Component {
 
     state = {
             "artistName": null,
-            "artistImageURL": "https://dummyimage.com/320X320/4bb6e6/4bb6e6",
+            "artistImageURL": null,
             "topTracksAudioFeaturesMean": {
                 "acousticness": 0.0,
                 "danceability": 0.2,
@@ -38,7 +39,7 @@ class App extends Component {
             },
             "window_height": 0,
             "window_width": 0,
-            "min_mobile_display_width": 850
+            "min_mobile_display_width": 925
     };
 
 
@@ -94,7 +95,7 @@ class App extends Component {
                 .catch(error => {
                     const defaultState = {
                         "artistName": "Artist Not Found",
-                        "artistImageURL": "https://dummyimage.com/320X320/4bb6e6/4bb6e6",
+                        "artistImageURL": null,
                         "currently_selected_audiofeatures": {
                             "acousticness": 0,
                             "danceability": 0,
@@ -129,7 +130,7 @@ class App extends Component {
             <div className="App" >
                 <Navbar className="navbar" sticky="top"  bg="dark" variant="dark">
                     <img
-                        src="eug_logo.png"
+                        src={EugLogo}
                         width="30"
                         height="30"
                         className="navbar-image"
