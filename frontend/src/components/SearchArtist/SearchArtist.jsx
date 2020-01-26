@@ -12,7 +12,7 @@ class SearchArtist extends Component {
                     <div className='circle'>Artist Image</div>
                     :
                     <Image className='image' src={this.props.artistInfo.artistImageURL} fluid roundedCircle/>
-                }
+                    }
                 <Form className='form' >
                     <Form.Group controlId="formSearchArtist">
                         <Form.Control ref={input => this.textInput = input} type="artist" placeholder="Enter Artist" />

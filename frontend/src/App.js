@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import EugLogo from './assets/Logo/eug_logo.png';
+import GitHubIcon from './assets/images/GitHub-Mark-Light-64px.png';
 import SearchArtist from "./components/SearchArtist/SearchArtist";
 import Chart from "./components/Chart/Chart"
 import Navbar from 'react-bootstrap/Navbar';
@@ -128,14 +129,26 @@ class App extends Component {
     render() {
             return (
             <div className="App" >
-                <Navbar className="navbar" sticky="top"  bg="dark" variant="dark">
+                <Navbar className="navbar"  bg="dark" variant="dark">
+                    <Navbar.Brand href="https://www.eugeneupston.com/">
+
                     <img
                         src={EugLogo}
                         width="30"
                         height="30"
-                        className="navbar-image"
                     />
+                    </Navbar.Brand>
+
                     <Navbar.Brand href="#home">Spotistics</Navbar.Brand>
+                    <Navbar.Brand href="https://github.com/eupston"  className="ml-auto">
+                        <img
+                            alt=""
+                            src={GitHubIcon}
+                            width="32"
+                            height="32"
+                        />
+                    </Navbar.Brand>
+
                 </Navbar>
                 <div className="App-body">
                     <SearchArtist onGetArtistAudioInfo={this.handleGetArtistAudioInfo} artistInfo={this.state} />

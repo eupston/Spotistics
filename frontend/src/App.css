@@ -24,6 +24,10 @@
   font-family: Helvetica;
 }
 
-.navbar-image{
-  margin-right: 20px;
+.navbar-links{
+  align-items: end;
+  justify-items: end;
+  justify-content: end;
+  align-content: end;
+  align-self: end;
 }
