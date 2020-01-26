@@ -12,7 +12,6 @@ const Chart = (props) => {
 
     return(
         <div className='chart'>
-            {console.log(window.innerWidth)}
             <ResponsiveBar
                 data={currentData}
                 keys={Object.keys(props.data)}
@@ -82,15 +81,11 @@ const Chart = (props) => {
                 labelSkipHeight={12}
                 labelTextColor={{ from: 'color', modifiers: [ [ 'darker', '0.8' ] ] }}
                 legends={[]}
-                // tooltip={e => {
-                //     return (
-                //         <div>
-                //             {"l"
-                //                 ? "test4"
-                //                 : "No data"}
-                //         </div>
-                //     );
-                // }}
+                tooltip={({ id }) => (
+                    <div className='tooltips'>
+                        <strong>{id.toUpperCase()}:</strong><br></br> {props.tooltips[id]}
+                    </div>
+                )}
                 animate={true}
                 motionStiffness={90}
                 motionDamping={15}

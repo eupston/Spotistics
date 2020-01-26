@@ -17,7 +17,9 @@ class SearchArtist extends Component {
                     <Form.Group controlId="formSearchArtist">
                         <Form.Control ref={input => this.textInput = input} type="artist" placeholder="Enter Artist" />
                     </Form.Group>
-                    <Button onClick={() => this.props.onGetArtistAudioInfo(this.textInput.value)}
+                    <Button
+                            id='artistSearchButton'
+                            onClick={() => this.props.onGetArtistAudioInfo(this.textInput.value)}
                             variant="outline-primary"
                             disabled={this.props.artistInfo.isLoading}
                             block

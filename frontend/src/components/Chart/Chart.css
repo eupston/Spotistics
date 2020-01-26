@@ -5,6 +5,12 @@
     align-self: center;
 }
 
+.tooltips {
+    font-family: inherit;
+    color: white;
+    background-color: #282c34;
+
+}
 
 .dropdown{
     margin: 7px;
