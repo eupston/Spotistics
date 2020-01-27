@@ -1,11 +1,18 @@
 # Spotistics
-A Deep Learning Audio Plugin that Classifies Beatboxes and converts to midi in Real Time.
+A Springboot/React Web App for viewing Spotify statistics
 
 #### Welcome to the Spotistics repository!
-A Springboot/React web app for viewing spotify statistics
-The app is live here: https://spotistics.herokuapp.com/
+Spotistics is a web app for viewing artist spotify statistics. At present you can view audio features for any spotify artist for any of their top tracks.
 
-![](frontend/src/assets/images/spotistics_screenshot.png)
+You can vist the Web App here : https://spotistics.herokuapp.com/
 
+![](/frontend/src/assets/images/spotistics_screenshot.png)
 
+#### Technology Stack
 
+- Spring Boot
+- JDBC
+- Hibernate
+- Postgres Database
+- Heroku CI/CD
+- React js
