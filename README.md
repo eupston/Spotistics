@@ -11,6 +11,7 @@ You can vist the Web App here : https://spotistics.herokuapp.com/
 #### Technology Stack
 
 - Spring Boot
+- Spring Rest
 - JDBC
 - Hibernate
 - Postgres Database
