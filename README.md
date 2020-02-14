@@ -34,5 +34,5 @@ You can visit the Web App here : https://spotistics.herokuapp.com/
 1. User can search any artist through the Form Element.
 2. On the Form Element Submitation a request goes out to the backend for that given artist and all their top track's audio features.
 3. If that artist is found it then parses the json response and populates the react state with the full list of artist info and top track's data. This is so a request only has to be made once during an artist search. 
-4. The graph component will intially be populated with the top track's audio features.
+4. The graph component will initially be populated with the top track's audio features.
 4. A user can then browser through the various track's audio features for a responsive graph update.
